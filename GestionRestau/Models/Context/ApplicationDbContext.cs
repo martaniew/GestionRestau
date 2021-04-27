@@ -21,7 +21,7 @@ namespace GestionRestau.Models.Context
 
 
 
-        public DbSet<Serveur>Servers { get; set; } //DBset represnts une table
+        public DbSet<Serveur>Serveurs { get; set; } //DBset represnts une table
         public DbSet<TableCmd> TableCmds { get; set; }
         public DbSet<Produit> Produits { get; set; }
         public DbSet<Consommation> Consommations { get; set; }
