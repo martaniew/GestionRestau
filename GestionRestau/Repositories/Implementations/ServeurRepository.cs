@@ -10,7 +10,7 @@ namespace GestionRestau.Repositories.Implementations
 {
     public class ServeurRepository : IServeurRepository
     {
-        private readonly ApplicationDbContext _dbContext; //creer noveau object de la class Dependency injection 
+        private readonly ApplicationDbContext _dbContext; //creer noveau object de la class.  Dependency injection 
         public ServeurRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -29,7 +29,9 @@ namespace GestionRestau.Repositories.Implementations
 
         public Serveur GetById(int Id)
             {
-           return  _dbContext.Serveurs.Find(Id);
+           var serveur = _dbContext.Serveurs.Find(Id);
+            _dbContext.Entry(serveur).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            return serveur; 
         }
 
         public void Update (Serveur serveur)

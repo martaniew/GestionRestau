@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionRestau.Repositories.Interfaces
 {
-    interface IConsommationRepository
+    public interface IConsommationRepository
     {
         public ICollection<Consommation> GetAll();
         public void Insert(Consommation consommation);

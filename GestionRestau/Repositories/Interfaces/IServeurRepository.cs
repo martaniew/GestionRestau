@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionRestau.Repositories.Interfaces
 {
-    interface IServeurRepository
+    public interface IServeurRepository
     {
         public ICollection<Serveur> GetAll();
         public void Insert(Serveur serveur);

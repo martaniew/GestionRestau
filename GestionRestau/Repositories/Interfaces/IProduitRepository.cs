@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestionRestau.Repositories.Interfaces
 {
-    interface IProduitRepository
+    public interface IProduitRepository
     {
         public ICollection<Produit> GetAll();
         public void Insert(Produit produit);

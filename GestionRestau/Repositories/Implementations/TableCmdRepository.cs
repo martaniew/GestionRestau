@@ -1,6 +1,7 @@
 ﻿using GestionRestau.Models;
 using GestionRestau.Models.Context;
 using GestionRestau.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,16 @@ namespace GestionRestau.Repositories.Implementations
 
         public ICollection<TableCmd> GetAll()
         {
-            var tableCmds = _dbContext.TableCmds.ToList();
+            var tableCmds = _dbContext.TableCmds.ToList(); 
+            return tableCmds;
+        }
+
+
+        public ICollection<TableCmd> GetAllWithServers()
+        {
+            var tableCmds = _dbContext.TableCmds.Include(tbl => tbl.Serveur)
+                //.Where(tbl=>tbl.Serveur.Id==2)// where dans le inner join 
+                .ToList(); //Join the Id servers the table server 
             return tableCmds;
         }
 
@@ -29,11 +39,17 @@ namespace GestionRestau.Repositories.Implementations
 
         public TableCmd GetById(int Id)
         {
-            return _dbContext.TableCmds.Find(Id);
+
+            var serveur = _dbContext.TableCmds.Find(Id);
+            _dbContext.Entry(serveur).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            return serveur; 
         }
 
         public void Update(TableCmd tableCmd)
         {
+           
+            
+            
             _dbContext.Entry(tableCmd).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
@@ -43,9 +59,18 @@ namespace GestionRestau.Repositories.Implementations
             _dbContext.TableCmds.Remove(tableCmdToDelate);
         }
 
+
+        public TableCmd GetByIdWithServeur(int Id)
+        {
+            return _dbContext.TableCmds.Include(tbl => tbl.Serveur)
+                 .FirstOrDefault(tbl => tbl.Id == Id); 
+        }
+
         public void Save() //enregistrement fait dans le DBContext 
         {
             _dbContext.SaveChanges();
         }
+
+      
     }
 }
