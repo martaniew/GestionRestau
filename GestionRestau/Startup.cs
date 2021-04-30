@@ -66,18 +66,18 @@ namespace GestionRestau
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           
+
             // if epplication is in develepment we use this exception 
-            if (env.IsDevelopment())
-            {
+           // if (env.IsDevelopment())
+          //  {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+           // }
+           // else
+            //{
+                //app.UseExceptionHandler("/Home/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
             // use https when its possible 
             app.UseHttpsRedirection();
 
@@ -101,6 +101,9 @@ namespace GestionRestau
                     name: "default",
                     pattern: "{controller=TableCmd}/{action=Index}/{id?}");  /*definir dans le pattern  page de accuile */
             });
+
+            
+
         }
     }
 }
